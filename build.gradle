@@ -1,19 +1,51 @@
 plugins {
-    id 'java'
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
 }
 
-group 'com.github.benchmarkr'
-version '1.0-SNAPSHOT'
+group = 'com.github.benchmarkr'
+version = '0.0.2'
 
 repositories {
     mavenCentral()
+    maven {
+        name = "BenchmarkrJavaGithubPackages"
+        url = "https://maven.pkg.github.com/tnweiss/benchmarkr-java"
+        credentials {
+            username = System.getenv("GITHUB_USERNAME")
+            password = System.getenv("GITHUB_ACCESS_TOKEN")
+        }
+    }
 }
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'com.github.benchmarkr'
+            version = '0.0.2'
+            implementationClass = 'com.github.benchmarkr.BenchmarkrPlugin'
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "BenchmarkrJavaGradleGithubPackages"
+            url 'https://maven.pkg.github.com/tnweiss/benchmarkr-java-gradle-plugin'
+            credentials(HttpHeaderCredentials) {
+                name = "Authorization"
+                value = "Bearer " + System.getenv("GITHUB_TOKEN")
+            }
+            authentication {
+                header(HttpHeaderAuthentication)
+            }
+        }
+    }
+}
+
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
-
-test {
-    useJUnitPlatform()
+    implementation 'com.github.benchmarkr:benchmarkr:0.0.2'
 }
