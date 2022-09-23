@@ -5,16 +5,28 @@ plugins {
 }
 
 group = 'com.github.benchmarkr'
-version = '0.0.2'
+version = '0.0.4'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 repositories {
     mavenCentral()
     maven {
         name = "BenchmarkrJavaGithubPackages"
         url = "https://maven.pkg.github.com/tnweiss/benchmarkr-java"
-        credentials {
-            username = System.getenv("GITHUB_USERNAME")
-            password = System.getenv("GITHUB_ACCESS_TOKEN")
+        credentials(HttpHeaderCredentials) {
+            name = "Authorization"
+            value = "Bearer " + System.getenv("GITHUB_ACCESS_TOKEN")
+        }
+        authentication {
+            header(HttpHeaderAuthentication)
+        }
+        content {
+            includeGroup "com.github.benchmarkr"
         }
     }
 }
@@ -23,7 +35,7 @@ gradlePlugin {
     plugins {
         simplePlugin {
             id = 'com.github.benchmarkr'
-            version = '0.0.2'
+            version = '0.0.4'
             implementationClass = 'com.github.benchmarkr.BenchmarkrPlugin'
         }
     }
@@ -36,7 +48,7 @@ publishing {
             url 'https://maven.pkg.github.com/tnweiss/benchmarkr-java-gradle-plugin'
             credentials(HttpHeaderCredentials) {
                 name = "Authorization"
-                value = "Bearer " + System.getenv("GITHUB_TOKEN")
+                value = "Bearer " + System.getenv("GITHUB_ACCESS_TOKEN")
             }
             authentication {
                 header(HttpHeaderAuthentication)
@@ -45,7 +57,6 @@ publishing {
     }
 }
 
-
 dependencies {
-    implementation 'com.github.benchmarkr:benchmarkr:0.0.2'
+    implementation 'com.github.benchmarkr:benchmarkr:0.0.4'
 }
