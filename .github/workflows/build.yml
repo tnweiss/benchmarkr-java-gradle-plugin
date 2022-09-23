@@ -21,7 +21,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: Build with maven
+      - name: Build with Gradle
         run: ./gradlew build
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
