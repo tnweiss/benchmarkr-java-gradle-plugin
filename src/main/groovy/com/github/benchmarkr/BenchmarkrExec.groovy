@@ -8,7 +8,7 @@ import org.gradle.api.tasks.compile.JavaCompile
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-abstract class BenchmarkrExec extends JavaExec {
+class BenchmarkrExec extends JavaExec {
     public static final String EXTENSION_NAME = "benchmarkConfig"
     private static final Logger logger = LoggerFactory.getLogger(BenchmarkrExec.class)
 
@@ -33,6 +33,10 @@ abstract class BenchmarkrExec extends JavaExec {
 
         // set the classpath for the task
         classpath(compileUrls)
+
+        // add resource directories for source and test
+        classpath(sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME).output.resourcesDir)
+        classpath(sourceSets.getByName(SourceSet.TEST_SOURCE_SET_NAME).output.resourcesDir)
     }
 
     @Override
