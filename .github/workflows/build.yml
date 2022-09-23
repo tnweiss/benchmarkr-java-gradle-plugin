@@ -25,5 +25,4 @@ jobs:
       - name: Build with maven
         run: ./gradlew build
         env:
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -14,14 +14,16 @@ java {
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven {
         name = "BenchmarkrJavaGithubPackages"
         url = "https://maven.pkg.github.com/tnweiss/benchmarkr-java"
-        credentials {
-            username = System.getenv("GITHUB_USERNAME")
-            password = System.getenv("GITHUB_ACCESS_TOKEN")
+        credentials(HttpHeaderCredentials) {
+            name = "Authorization"
+            value = "Bearer " + System.getenv("GITHUB_ACCESS_TOKEN")
+        }
+        content {
+            includeGroup "com.github.benchmarkr"
         }
     }
 }

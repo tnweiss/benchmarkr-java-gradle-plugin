@@ -28,5 +28,4 @@ jobs:
       - name: Build with gradle
         run: ./gradlew publishAllPublicationsToBenchmarkrJavaGradleGithubPackagesRepository
         env:
-          GITHUB_USER: ${{ secrets.GITHUB_USER }}
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
