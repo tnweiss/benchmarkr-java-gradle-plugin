@@ -53,5 +53,5 @@ publishing {
 }
 
 dependencies {
-    api 'com.github.benchmarkr:benchmarkr:0.0.4'
+    implementation 'com.github.benchmarkr:benchmarkr:0.0.4'
 }

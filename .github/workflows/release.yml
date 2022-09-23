@@ -26,6 +26,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Build with gradle
-        run: ./gradlew publishSimplePluginPluginMarkerMavenPublicationToBenchmarkrJavaGradleGithubPackagesRepository
+        run: ./gradlew publishAllPublicationsToBenchmarkrJavaGradleGithubPackagesRepository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
