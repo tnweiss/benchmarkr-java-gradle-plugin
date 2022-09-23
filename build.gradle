@@ -22,6 +22,9 @@ repositories {
             name = "Authorization"
             value = "Bearer " + System.getenv("GITHUB_ACCESS_TOKEN")
         }
+        authentication {
+            header(HttpHeaderAuthentication)
+        }
         content {
             includeGroup "com.github.benchmarkr"
         }
