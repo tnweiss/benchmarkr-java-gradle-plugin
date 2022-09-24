@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.github.benchmarkr'
-version = '0.0.5'
+version = '0.0.6'
 
 java {
     toolchain {
@@ -35,7 +35,7 @@ gradlePlugin {
     plugins {
         simplePlugin {
             id = 'com.github.benchmarkr'
-            version = '0.0.5'
+            version = '0.0.6'
             implementationClass = 'com.github.benchmarkr.BenchmarkrPlugin'
         }
     }
