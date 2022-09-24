@@ -8,6 +8,7 @@ class BenchmarkrExtension {
     private String methodName = BenchmarkrCore.METHOD_PROPERTY_DEFAULT
     private int iterations = Integer.parseInt(BenchmarkrCore.ITERATIONS_PROPERTY_DEFAULT)
     private boolean ignoreFailures = false
+    private boolean recordResults = false
     private String console = BenchmarkrCore.CONSOLE_PROPERTY_DEFAULT
 
     ///////////////////////////////////////////////////// METHODS /////////////////////////////////////////////////////
@@ -20,6 +21,7 @@ class BenchmarkrExtension {
         data.put(BenchmarkrCore.ITERATIONS_PROPERTY, iterations)
         data.put(BenchmarkrCore.IGNORE_FAILURES_PROPERTY, ignoreFailures)
         data.put(BenchmarkrCore.CONSOLE_PROPERTY, console)
+        data.put(BenchmarkrCore.RECORD_PROPERTY, recordResults)
 
         return data
     }
@@ -76,6 +78,19 @@ class BenchmarkrExtension {
 
     boolean ignoreFailures() {
         return this.ignoreFailures
+    }
+
+    @Option(longName = "record-results", shortName = 'r')
+    void recordResults(String recordResults) {
+        this.recordResults = Boolean.parseBoolean(recordResults)
+    }
+
+    void recordResults(boolean recordResults) {
+        this.recordResults = recordResults
+    }
+
+    boolean recordResults() {
+        return this.recordResults
     }
 
     @Option(longName = "console", shortName = 'o')
